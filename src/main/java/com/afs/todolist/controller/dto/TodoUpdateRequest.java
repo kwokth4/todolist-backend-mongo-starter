@@ -4,7 +4,9 @@ public class TodoUpdateRequest {
     private Boolean done;
     private String text;
 
-    public TodoUpdateRequest() {
+    public TodoUpdateRequest(String text, Boolean done) {
+        this.text = text;
+        this.done = done;
     }
 
     public Boolean getDone() {

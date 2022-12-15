@@ -2,6 +2,7 @@ package com.afs.todolist.service;
 
 import com.afs.todolist.entity.Todo;
 import com.afs.todolist.exception.InvalidIdException;
+import com.afs.todolist.exception.TodoNotFoundException;
 import com.afs.todolist.repository.TodoRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,14 @@ public class TodoService {
     public void deleteTodo(String id) {
         validateObjectId(id);
         todoRepository.deleteById(id);
+    }
+    public Todo findById(String id){
+        return todoRepository.findById(id).orElseThrow(() -> new TodoNotFoundException(id));
+    }
+    public Todo updateTodo(String id, Todo todo) {
+        Todo targetTodo = findById(id);
+        targetTodo.setText(todo.getText());
+        targetTodo.setDone(todo.getDone());
+        return todoRepository.save(targetTodo);
     }
 }
