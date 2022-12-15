@@ -1,11 +1,11 @@
 package com.afs.todolist.controller;
 
+import com.afs.todolist.controller.dto.TodoCreateRequest;
 import com.afs.todolist.controller.mapper.TodoMapper;
 import com.afs.todolist.entity.Todo;
 import com.afs.todolist.service.TodoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +25,14 @@ public class TodoController {
     List<Todo> getAll() {
         return todoService.findAll();
     }
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    Todo createTodo(@RequestBody TodoCreateRequest todoCreateRequest){
+        Todo todo = todoMapper.toEntity(todoCreateRequest);
+        return todoService.createTodo(todo);
+    }
 }
+
+//@CrossOrigin method
+//@CrossOrigin controller
+//WebMvcConfigure

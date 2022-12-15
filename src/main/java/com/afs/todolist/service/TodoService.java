@@ -20,6 +20,9 @@ public class TodoService {
     public List<Todo> findAll() {
         return todoRepository.findAll();
     }
+    public Todo createTodo(Todo todo){
+        return todoRepository.save(todo);
+    }
 
     private void validateObjectId(String id){
         if(!ObjectId.isValid(id)){
