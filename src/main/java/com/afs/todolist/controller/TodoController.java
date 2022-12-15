@@ -31,6 +31,11 @@ public class TodoController {
         Todo todo = todoMapper.toEntity(todoCreateRequest);
         return todoService.createTodo(todo);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteTodo(@PathVariable String id){
+        todoService.deleteTodo(id);
+    }
 }
 
 //@CrossOrigin method

@@ -29,4 +29,8 @@ public class TodoService {
             throw new InvalidIdException(id);
         }
     }
+    public void deleteTodo(String id) {
+        validateObjectId(id);
+        todoRepository.deleteById(id);
+    }
 }
